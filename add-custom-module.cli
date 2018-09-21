@@ -1,0 +1,3 @@
+# Add the custom module to the server
+
+module add --name=lk.inli.elytron.custom-http-mechanism --resources=target/ElytronHttpCustomModule-1.0-SNAPSHOT.jar --dependencies=org.wildfly.security.elytron,javax.api

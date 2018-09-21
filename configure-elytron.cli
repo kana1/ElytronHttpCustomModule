@@ -1,0 +1,29 @@
+# Start batching commands
+batch
+
+#Create properties files at config dir as follows
+## example-users.properties
+# #$REALM_NAME=examplePropRealm$
+# user1=password123
+# user2=password123
+
+##example-roles.properties
+# user1=Admin
+# user2=Guest
+
+/subsystem=elytron/properties-realm=examplePropRealm:add(groups-attribute=groups,groups-properties={path=example-roles.properties,relative-to=jboss.server.config.dir},users-properties={path=example-users.properties,relative-to=jboss.server.config.dir,plain-text=true})
+
+/subsystem=elytron/security-domain=exampleSD:add(realms=[{realm=examplePropRealm,role-decoder=groups-to-roles}],default-realm=examplePropRealm,permission-mapper=default-permission-mapper)
+
+# Add the resource to discover the factory implementation for the custom module.
+/subsystem=elytron/service-loader-http-server-mechanism-factory=custom-server-factory:add(module=lk.inli.elytron.custom-http-mechanism)
+
+/subsystem=elytron/http-authentication-factory=example-http-auth:add(http-server-mechanism-factory=custom-server-factory,security-domain=exampleSD,mechanism-configurations=[{mechanism-name=FORM,mechanism-realm-configurations=[{realm-name=exampleApplicationDomain}]}])
+
+/subsystem=undertow/application-security-domain=exampleApplicationDomain:add(http-authentication-factory=example-http-auth)
+
+# Run the batch commands
+run-batch
+
+# Reload the server configuration
+reload
