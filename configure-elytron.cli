@@ -18,7 +18,7 @@ batch
 # Add the resource to discover the factory implementation for the custom module.
 /subsystem=elytron/service-loader-http-server-mechanism-factory=custom-server-factory:add(module=lk.inli.elytron.custom-http-mechanism)
 
-/subsystem=elytron/http-authentication-factory=example-http-auth:add(http-server-mechanism-factory=custom-server-factory,security-domain=exampleSD,mechanism-configurations=[{mechanism-name=FORM,mechanism-realm-configurations=[{realm-name=exampleApplicationDomain}]}])
+/subsystem=elytron/http-authentication-factory=example-http-auth:add(http-server-mechanism-factory=custom-server-factory,security-domain=exampleSD,mechanism-configurations=[{mechanism-name=CUSTOM_MECHANISM,mechanism-realm-configurations=[{realm-name=exampleApplicationDomain}]}])
 
 /subsystem=undertow/application-security-domain=exampleApplicationDomain:add(http-authentication-factory=example-http-auth)
 
