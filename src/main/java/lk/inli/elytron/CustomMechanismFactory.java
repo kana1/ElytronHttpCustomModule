@@ -22,7 +22,9 @@ public class CustomMechanismFactory implements HttpServerAuthenticationMechanism
     static final String CUSTOM_NAME = "CUSTOM_MECHANISM";
 
     @Override
-    public HttpServerAuthenticationMechanism createAuthenticationMechanism(String name, Map<String, ?> properties, CallbackHandler handler) throws HttpAuthenticationException {
+    public HttpServerAuthenticationMechanism createAuthenticationMechanism(String name, 
+    																	   Map<String, ?> properties, 
+    																	   CallbackHandler handler) throws HttpAuthenticationException {
         if (CUSTOM_NAME.equals(name)) {
             /*
              * The properties could be used at this point to further customise the behaviour of the mechanism.
